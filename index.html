@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offside Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background:#222;
+  }
+
+  h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+}
+  /* HEADER */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #222;
+    color: white;
+    padding: 15px 20px;
+  }
+  header h1 {
+    margin: 0;
+  }
+  header p {
+    margin: 0;
+    font-size: 12px;
+    opacity: 0.7;
+  }
+  #HamburgerMenu {
+    font-size: 26px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* WELCOME MODAL OVERLAY */
+  .overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 999;
+  }
+  .overlay.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* WELCOME MODAL */
+  .modal {
+    background: #fff;
+    padding: 20px;
+    max-width: 90%;
+    width: 400px;
+    border-radius: 12px;
+    text-align: center;
+    transform: translateY(-30px);
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+  .overlay.show .modal {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .close-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  /* HAMBURGER MENU OVERLAY */
+  .menu-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 998;
+  }
+  .menu-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* BOTTOM SHEET MENU */
+  .menu-modal {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+    padding: 20px;
+    transition: bottom 0.4s ease;
+    z-index: 999;
+  }
+  .menu-modal.show {
+    bottom: 0;
+  }
+
+  .menu-modal h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .menu-modal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  .menu-modal ul li {
+    margin: 12px 0;
+  }
+  .menu-modal ul li a {
+    text-decoration: none;
+    color: #222;
+    font-size: 1.1rem;
+  }
+ .logo {
+  width: 120px;       /* max size */
+  height: 120px;      /* keep it square */
+  border-radius: 50%; /* makes it round */
+  object-fit: cover;  /* makes sure it doesn’t stretch */
+  display: block;
+  margin: 0 auto;     /* centers it */
+}
+
+@media (max-width: 600px) {
+  .logo {
+    width: 80px;   /* smaller on mobile */
+    height: 80px;
+  }
+}
+
+.slider {
+  position: relative;
+  max-width: 100%;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.slides img {
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+}
+
+/* Buttons */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  opacity: 0;
+}
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* Dots */
+.dots {
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+.dots span {
+  height: 10px;
+  width: 10px;
+  margin: 0 4px;
+  background: #bbb;
+  display: inline-block;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dots .active {
+  background: #333;
+}
+
+.products-container {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  grid-template-columns: repeat(2, 1fr); /* default 2 columns */
+}
+
+@media (min-width: 1024px) { /* laptop/desktop */
+  .products-container {
+    grid-template-columns: repeat(8, 1fr); /* 8 columns */
+  }
+}
+
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 15px;
+  text-align: center;
+}
+
+.product-info h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.product-info p {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.product-buttons {
+  display: flex;
+  justify-content: space-between; /* space between the buttons */
+  padding: 8px 15px 12px 15px;
+  gap: 8px; /* optional, spacing between buttons */
+}
+
+.product-buttons button {
+  flex: 1;
+  padding: 6px 8px;        /* button height + side padding */
+  font-size: 0.75rem;      /* smaller font to fit text in one line */
+  white-space: nowrap;      /* prevents text from wrapping */
+  overflow: hidden;         /* hides overflow if text is too long */
+  text-overflow: ellipsis;  /* adds ... if it’s really long */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+
+.add-cart {
+  background: #222;
+  color: #fff;
+}
+
+.add-cart:hover {
+  background: #555;
+}
+
+.viewDetailsModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  padding: 20px;
+  z-index: 1000;
+  display: none; /* hidden by default */
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.viewDetailsModal img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.viewDetailsModal h1 {
+  font-size: 1.2rem;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.viewDetailsModal p {
+  font-size: 1rem;
+  margin: 4px 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.kit-size {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.kitSizeButton {
+  flex: 1;
+  padding: 6px 0;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #eee;
+  transition: background 0.3s;
+}
+
+.kitSizeButton:hover {
+  background: #ccc;
+}
+
+#Amount {
+  width: 100%;
+  padding: 6px 8px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+#add-cart {
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  border-radius: 6px;
+  background: #222;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+#add-cart:hover {
+  background: #555;
+}
+
+/* overlay behind modal */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none; /* hidden by default */
+  z-index: 999;
+}
+ #section2526 {
+  background-image: url('https://www.soccerbible.com/media/149463/madrid-fb-min.jpg');
+  background-size: cover;      /* Ensures the image covers the entire section */
+  background-position: center; /* Centers the image within the section */
+  background-repeat: no-repeat;/* Prevents the image from repeating */
+  width: 100%;                 /* Makes the section full width */
+  height: 200px;               /* Sets a fixed height for the section */
+  text-align: center;
+  color: wheat;
+ }
+
+ #section2526button {   
+  padding: 8px 15px 12px 15px;
+  background-color: rgb(34, 34, 34 , 0.5);
+  color: white;
+  border-radius: 6px;
+ }
+
+ .fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slider-overlay {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  text-align: center;
+  color: #fff;
+  padding: 0 10px;   /* lil breathing room on mobile */
+  z-index: 10;       /* sits on top of images */
+}
+
+.slider-overlay h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.slider-overlay p {
+  font-size: 1rem;
+}
+
+</style>
+</head>
+<body>
+<div class="slider">
+    <div class="slider-overlay">
+     <h2>Offside? Never.Your perfect kit is here.</h2>
+</div>
+  <div class="slides">
+    <img src="https://i.ibb.co/sJM4CSkc/Whats-App-Image-2025-08-19-at-12-00-37-54366e0f.jpg" alt="Slide 1">
+    <img src="https://i.ibb.co/ycgpnFL8/Whats-App-Image-2025-08-19-at-12-00-38-25c0564d.jpg" alt="Slide 2">
+    <img src="img3.jpg" alt="Slide 3">
+  </div>
+  <button class="prev" display="None">&#10094;</button>
+  <button class="next" display="None">&#10095;</button>
+  <div class="dots"></div>
+</div>
+
+<header>
+    <span id="HamburgerMenu">☰</span>
+    <img src="https://i.ibb.co/PzGBXNDR/Whats-App-Image-2025-08-19-at-12-03-38-11c8209e.jpg" alt="logo" class="logo">
+    <i class="bi bi-bag"></i>
+    <i class="bi bi-search"></i>
+</header>
+
+<!-- WELCOME MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h2>Welcome to Offside's official website!</h2>
+    <p>Check out our latest soccer kits 🔥</p>
+    <button class="close-btn" id="closeWelcome">Close</button>
+  </div>
+</div>
+
+<!-- HAMBURGER MENU -->
+<div class="menu-overlay" id="menuOverlay"></div>
+<div class="menu-modal" id="menuModal">
+  <h2>Categories</h2>
+  <ul>
+    <li><a href="#">Retro Kits</a></li>
+    <li><a href="#">'25-'26 Kits</a></li>
+    <li><a href="#">Special Kits</a></li>
+    <li><a href="#">Hot</a></li>
+  </ul>
+  <button class="close-btn" id="closeMenu">Close</button>
+</div>
+<section id="section2526" class="fade-up">
+    <h1>shop the most recent kits of 2025 !</h1>
+    <button onclick="renderProducts('2526')" id="section2526button">Click Here</button>
+</section>
+<div class="categoriesContainer">
+    <button id="retroCategory"></button>
+    <button id="Category2526"></button>
+    <button id="specialCategory"></button>
+    <button id="hotcategory"></button>
+</div>
+<div class="products-container"></div>
+
+<div class="viewDetailsModal">
+    <img src=""alt="image">
+    <h1>${product.title}</h1>
+    <p>${product.price}</p>
+    <p>Size</p>
+    <div class="kit-size">
+        <button class="kitSizeButton">S</button>
+        <button class="kitSizeButton">M</button>
+        <button class="kitSizeButton">L</button>
+        <button class="kitSizeButton">XL</button>
+        <button class="kitSizeButton">2XL</button>
+    </div>
+    <input id="Amount" Placeholder="1"></input>
+    <button onclick="addToCart()" id="add-cart"><span class="bi bi-bag"></span>Add To Cart</button>
+</div>
+<script>
+    const slides = document.querySelector('.slides');
+const images = document.querySelectorAll('.slides img');
+const prev = document.querySelector('.prev');
+const next = document.querySelector('.next');
+const dotsContainer = document.querySelector('.dots');
+
+let index = 0;
+let slideInterval;
+
+// create dots dynamically
+images.forEach((_, i) => {
+  const dot = document.createElement('span');
+  dot.addEventListener('click', () => moveToSlide(i));
+  dotsContainer.appendChild(dot);
+});
+const dots = dotsContainer.querySelectorAll('span');
+
+function updateSlider() {
+  slides.style.transform = `translateX(${-index * 100}%)`;
+  dots.forEach(dot => dot.classList.remove('active'));
+  dots[index].classList.add('active');
+}
+
+function moveToSlide(i) {
+  index = i;
+  updateSlider();
+  resetInterval();
+}
+
+function moveNext() {
+  index = (index + 1) % images.length;
+  updateSlider();
+}
+function movePrev() {
+  index = (index - 1 + images.length) % images.length;
+  updateSlider();
+}
+
+next.addEventListener('click', moveNext);
+prev.addEventListener('click', movePrev);
+
+// autoplay
+function startInterval() {
+  slideInterval = setInterval(moveNext, 4000); // 4s
+}
+function resetInterval() {
+  clearInterval(slideInterval);
+  startInterval();
+}
+
+// init
+updateSlider();
+startInterval();
+
+  // WELCOME MODAL HERE
+  const overlay = document.getElementById('overlay');
+  const closeWelcome = document.getElementById('closeWelcome');
+
+  window.onload = () => {
+    overlay.classList.add('show');
+  };
+
+  closeWelcome.addEventListener('click', () => {
+    overlay.classList.remove('show');
+  });
+
+  // HAMBURGER MENU
+  const hamburger = document.getElementById('HamburgerMenu');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuModal = document.getElementById('menuModal');
+  const closeMenu = document.getElementById('closeMenu');
+
+  hamburger.addEventListener('click', () => {
+    menuOverlay.classList.add('show');
+    menuModal.classList.add('show');
+  });
+
+  closeMenu.addEventListener('click', () => {
+    menuOverlay.classList.remove('show');
+    menuModal.classList.remove('show');
+  });
+
+  menuOverlay.addEventListener('click', () => {
+    menuOverlay.classList.remove('show');
+    menuModal.classList.remove('show');
+  });
+
+  const products = [
+  {id:1, title:"Retro 1999 Kit", price:"$79.99", img:"https://tse1.mm.bing.net/th/id/OIP.JaBvJraE2zAX_FQkLZZaUgHaHa?pid=Api&P=0&h=220", category:"retro", sizes:["S","M","L","XL"]},
+  {id:2, title:"'25-'26 Home Kit", price:"$99.99", img:"home2526.jpg", category:"2526", sizes:["M","L","XL","2XL"]},
+  {id:3, title:"Special Limited Kit", price:"$120.00", img:"specialkit.jpg", category:"special", sizes:["S","M","L","XL","2XL"]},
+  {id:4, title:"Hot New Kit", price:"$110.00", img:"hotkit.jpg", category:"hot", sizes:["M","L","XL"]}
+];
+
+const container = document.querySelector('.products-container');
+const modal = document.querySelector('.viewDetailsModal');
+const viewItemOverlay = document.createElement('div');
+viewItemOverlay.className = 'modal-overlay';
+document.body.appendChild(viewItemOverlay);
+
+// modal close
+function closeModal() {
+  modal.style.display = 'none';
+  viewItemOverlay.style.display = 'none';
+}
+viewItemOverlay.addEventListener('click', closeModal);
+document.addEventListener('keydown', e => { if(e.key==="Escape") closeModal(); });
+
+// render products
+function renderProducts(filter=null) {
+  container.innerHTML = '';
+  const filtered = filter ? products.filter(p => p.category===filter) : products;
+  filtered.forEach(p => {
+    const card = document.createElement('div');
+    card.className = "product-card fade-up";
+    card.innerHTML = `
+      <img src="${p.img}" alt="${p.title}">
+      <div class="product-info">
+        <h3>${p.title}</h3>
+        <p>${p.price}</p>
+      </div>
+      <div class="product-buttons">
+        <button class="add-cart">Add To Cart</button>
+        <button class="view-details">View Details</button>
+      </div>
+    `;
+    container.appendChild(card);
+
+    // add to cart
+    card.querySelector('.add-cart').addEventListener('click', () => alert(`${p.title} added to cart! 🥀`));
+
+    // view details
+    card.querySelector('.view-details').addEventListener('click', () => {
+      modal.querySelector('img').src = p.img;
+      modal.querySelector('h1').textContent = p.title;
+      modal.querySelector('p').textContent = p.price;
+
+      // fill sizes dynamically
+      const kitSizeDiv = modal.querySelector('.kit-size');
+      kitSizeDiv.innerHTML = '';
+      p.sizes.forEach(size => {
+        const btn = document.createElement('button');
+        btn.className = 'kitSizeButton';
+        btn.textContent = size;
+        kitSizeDiv.appendChild(btn);
+      });
+
+      modal.style.display = 'flex';
+      viewItemOverlay.style.display = 'block';
+    });
+  });
+}
+
+// render all products by default
+renderProducts();
+
+// category buttons
+document.querySelectorAll('.category-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cat = btn.getAttribute('data-cat');
+    renderProducts(cat);
+  });
+});
+
+const menuLinks = document.querySelectorAll('#menuModal ul li a');
+
+// attach click to each category link
+menuLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault(); // prevent default anchor behavior
+
+    const categoryText = link.textContent.toLowerCase(); // "retro kits" etc.
+    let filterCat;
+
+    // map text to your product category keys
+    if(categoryText.includes('retro')) filterCat = 'retro';
+    else if(categoryText.includes("25-'26")) filterCat = '2526';
+    else if(categoryText.includes('special')) filterCat = 'special';
+    else if(categoryText.includes('hot')) filterCat = 'hot';
+
+    // render only filtered products
+    renderProducts(filterCat);
+
+    // close menu modal
+    document.getElementById('menuModal').style.display = 'none';
+    document.getElementById('menuOverlay').style.display = 'none';
+  });
+});
+
+const faders = document.querySelectorAll('.fade-up');
+
+function checkFade() {
+  const triggerBottom = window.innerHeight * 0.85; // 85% of viewport height
+
+  faders.forEach(fader => {
+    const top = fader.getBoundingClientRect().top;
+
+    if(top < triggerBottom) {
+      fader.classList.add('show');
+    }
+  });
+}
+
+window.addEventListener('scroll', checkFade);
+window.addEventListener('load', checkFade);
+
+</script>
+
+</body>
+</html>
