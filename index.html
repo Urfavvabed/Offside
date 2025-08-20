@@ -22,7 +22,7 @@
     justify-content: space-between;
     align-items: center;
     background: #222;
-    color: white;
+    color: wheat;
     padding: 15px 20px;
   }
   header h1 {
@@ -402,10 +402,15 @@
  }
 
  #section2526button {   
-  padding: 8px 15px 12px 15px;
-  background-color: rgb(34, 34, 34 , 0.5);
-  color: white;
+  padding: 8px 0;
+  border: none;
   border-radius: 6px;
+  background: rgba(20, 17, 17, 0.9);
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s;
  }
 
  .fade-up {
@@ -434,10 +439,304 @@
 .slider-overlay h2 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
+  color: #fff; /* keep white */
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.7); /* black shadow border */
 }
 
 .slider-overlay p {
   font-size: 1rem;
+  color: #fff; /* keep white */
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.7); /* black shadow border */
+}
+
+i {
+    margin-right: 15px;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.categories button {
+  width: 100%;
+  padding: 40px 10px; /* make them taller so the bg shows */
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8); /* makes text readable */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.categories button:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+/* backgrounds per category */
+.categories .retro {
+  background-image: url('https://up.yimg.com/ib/th/id/OIP.0_1voUhoETSy4Akai-fwVAHaHa?pid=Api&rs=1&c=1&qlt=95&w=121&h=121');
+}
+
+.categories .kits25 {
+  background-image: url('https://up.yimg.com/ib/th/id/OIP.qgHwgEdTPV6AN4QPH4rixwHaFk?pid=Api&rs=1&c=1&qlt=95&w=135&h=101');
+}
+
+.categories .special {
+  background-image: url('https://tse2.mm.bing.net/th/id/OIP.7bZ2RcQyEQXiWr9vQTUIlQHaHa?pid=Api&P=0&h=220');
+}
+
+.categories .hot {
+  background-image: url('https://tse1.mm.bing.net/th/id/OIP.qfE5pT8x_3uMdtNd7sKGZwAAAA?pid=Api&P=0&h=220');
+}
+
+.footer {
+  background: #111;
+  color: #eee;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-section h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: #bbb;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #fff;
+}
+
+.footer-section.form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-section.form input,
+.footer-section.form textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.footer-section.form button {
+  background: #e63946;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.footer-section.form button:hover {
+  background: #d62828;
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  text-align: center;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  font-size: 14px;
+  color: #888;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .footer-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 per row */
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .footer-container {
+    grid-template-columns: 1fr; /* stacked */
+  }
+}
+
+.slider-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+  font-size: 18px; /* default for mobile */
+  z-index: 2;
+}
+
+/* only on laptops/PC */
+@media (min-width: 1024px) {
+  .slider-overlay {
+    font-size: 36px;
+  }
+}
+
+#a {
+    background-color: #222;
+    color: rgb(245, 222, 179);
+    align-items: center;
+    text-align: center;
+}
+
+/* === Cart Overlay === */
+.cart-overlay {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 998;
+}
+.cart-overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.cart-modal {
+  position: fixed;
+  top: 0;
+  right: -100%; /* hidden by default */
+  width: 90%;
+  max-width: 400px;
+  height: 70%; /* shorter modal */
+  background: #fff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  transition: right 0.4s ease;
+  z-index: 999;
+  border-radius: 12px;
+}
+
+/* make cart items scrollable */
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.cart-modal.show {
+  right: 0;
+}
+
+/* === Header === */
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.cart-header h2 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+.cart-header button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+.cart-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+.cart-item-details {
+  flex: 1;
+}
+.cart-item-details h4 {
+  font-size: 0.9rem;
+  margin: 0 0 5px 0;
+}
+.cart-item-details p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* === Checkout Section === */
+.cart-footer {
+  border-top: 1px solid #ddd;
+  padding-top: 12px;
+}
+.cart-footer p {
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+.cart-footer button {
+  width: 100%;
+  padding: 10px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.cart-footer button:hover {
+  background: #333;
+}
+
+/* Highlight active size in product modal */
+.kitSizeButton.active {
+  background: #222;
+  color: #fff;
+  border-radius: 4px;
 }
 
 </style>
@@ -450,7 +749,7 @@
   <div class="slides">
     <img src="https://i.ibb.co/sJM4CSkc/Whats-App-Image-2025-08-19-at-12-00-37-54366e0f.jpg" alt="Slide 1">
     <img src="https://i.ibb.co/ycgpnFL8/Whats-App-Image-2025-08-19-at-12-00-38-25c0564d.jpg" alt="Slide 2">
-    <img src="img3.jpg" alt="Slide 3">
+    <img src="https://tse3.mm.bing.net/th/id/OIP.WrkNcsfAZ8_3724VfX6g9gHaEK?pid=Api&P=0&h=220" alt="Slide 3">
   </div>
   <button class="prev" display="None">&#10094;</button>
   <button class="next" display="None">&#10095;</button>
@@ -460,7 +759,7 @@
 <header>
     <span id="HamburgerMenu">☰</span>
     <img src="https://i.ibb.co/PzGBXNDR/Whats-App-Image-2025-08-19-at-12-03-38-11c8209e.jpg" alt="logo" class="logo">
-    <i class="bi bi-bag"></i>
+    <i class="bi bi-bag" id="cartIcon"></i>
     <i class="bi bi-search"></i>
 </header>
 
@@ -470,6 +769,23 @@
     <h2>Welcome to Offside's official website!</h2>
     <p>Check out our latest soccer kits 🔥</p>
     <button class="close-btn" id="closeWelcome">Close</button>
+  </div>
+</div>
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-modal" id="cartModal">
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <button id="closeCart" class="close-cart">&times;</button>
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <div class="cart-summary">
+    <h3>Summary</h3>
+    <p><i class="bi bi-truck"></i> Shipping: $4 (Lebanon)</p>
+    <p><i class="bi bi-cash-coin"></i> Payment: Cash on Delivery</p>
+    <p class="total" id="cartTotal"><strong>Total:</strong> $0</p>
+    <button class="checkout-btn">Proceed to Checkout</button>
   </div>
 </div>
 
@@ -487,16 +803,19 @@
 </div>
 <section id="section2526" class="fade-up">
     <h1>shop the most recent kits of 2025 !</h1>
-    <button onclick="renderProducts('2526')" id="section2526button">Click Here</button>
+    <button onclick="renderProducts(2526)" id="section2526button">Click Here</button>
 </section>
-<div class="categoriesContainer">
-    <button id="retroCategory"></button>
-    <button id="Category2526"></button>
-    <button id="specialCategory"></button>
-    <button id="hotcategory"></button>
+<div class="categories">
+  <button class="retro fade-up">Retro Kits</button>
+  <button class="kits25 fade-up">'25-'26 Kits</button>
+  <button class="special fade-up">Special Kits</button>
+  <button class="hot fade-up">Hot</button>
 </div>
-<div class="products-container"></div>
-
+<div class ="a">
+    <h2 style="position:relative; left: 100px; color: wheat;">Products List</h2>
+</div>
+<div class="products-container">
+</div>
 <div class="viewDetailsModal">
     <img src=""alt="image">
     <h1>${product.title}</h1>
@@ -512,72 +831,112 @@
     <input id="Amount" Placeholder="1"></input>
     <button onclick="addToCart()" id="add-cart"><span class="bi bi-bag"></span>Add To Cart</button>
 </div>
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Brand -->
+    <div class="footer-section brand">
+      <h2>Offside</h2>
+      <p>Where premium quality meets affordability ⚽</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Categories -->
+    <div class="footer-section">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="#">Retro Kits</a></li>
+        <li><a href="#">'25-'26 Kits</a></li>
+        <li><a href="#">Special Kits</a></li>
+        <li><a href="#">Hot</a></li>
+      </ul>
+    </div>
+
+    <!-- Customer Service -->
+    <div class="footer-section">
+      <h3>Customer Service</h3>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Refund Policy</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-section">
+      <h3>Contact Us</h3>
+      <ul>
+        <li><a href="tel:+96112345678">📞 +961 12 345 678</a></li>
+        <li><a href="mailto:support@offside.lb">📧 support@offside.lb</a></li>
+      </ul>
+    </div>
+
+    <!-- Form -->
+    <div class="footer-section form">
+      <h3>Didn't find what you wanted?</h3>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Tell us what you're looking for..." required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Offside. All rights reserved.</p>
+  </div>
+</footer>
+
 <script>
-    const slides = document.querySelector('.slides');
-const images = document.querySelectorAll('.slides img');
-const prev = document.querySelector('.prev');
-const next = document.querySelector('.next');
-const dotsContainer = document.querySelector('.dots');
+  // SLIDER
+  const slides = document.querySelector('.slides');
+  const images = document.querySelectorAll('.slides img');
+  const prev = document.querySelector('.prev');
+  const next = document.querySelector('.next');
+  const dotsContainer = document.querySelector('.dots');
+  let index = 0;
+  let slideInterval;
 
-let index = 0;
-let slideInterval;
+  images.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.addEventListener('click', () => moveToSlide(i));
+    dotsContainer.appendChild(dot);
+  });
+  const dots = dotsContainer.querySelectorAll('span');
 
-// create dots dynamically
-images.forEach((_, i) => {
-  const dot = document.createElement('span');
-  dot.addEventListener('click', () => moveToSlide(i));
-  dotsContainer.appendChild(dot);
-});
-const dots = dotsContainer.querySelectorAll('span');
+  function updateSlider() {
+    slides.style.transform = `translateX(${-index * 100}%)`;
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
+  }
 
-function updateSlider() {
-  slides.style.transform = `translateX(${-index * 100}%)`;
-  dots.forEach(dot => dot.classList.remove('active'));
-  dots[index].classList.add('active');
-}
+  function moveToSlide(i) { index = i; updateSlider(); resetInterval(); }
+  function moveNext() { index = (index + 1) % images.length; updateSlider(); }
+  function movePrev() { index = (index - 1 + images.length) % images.length; updateSlider(); }
 
-function moveToSlide(i) {
-  index = i;
+  next.addEventListener('click', moveNext);
+  prev.addEventListener('click', movePrev);
+  function startInterval() { slideInterval = setInterval(moveNext, 4000); }
+  function resetInterval() { clearInterval(slideInterval); startInterval(); }
+
   updateSlider();
-  resetInterval();
-}
-
-function moveNext() {
-  index = (index + 1) % images.length;
-  updateSlider();
-}
-function movePrev() {
-  index = (index - 1 + images.length) % images.length;
-  updateSlider();
-}
-
-next.addEventListener('click', moveNext);
-prev.addEventListener('click', movePrev);
-
-// autoplay
-function startInterval() {
-  slideInterval = setInterval(moveNext, 4000); // 4s
-}
-function resetInterval() {
-  clearInterval(slideInterval);
   startInterval();
-}
 
-// init
-updateSlider();
-startInterval();
-
-  // WELCOME MODAL HERE
+  // WELCOME MODAL
   const overlay = document.getElementById('overlay');
   const closeWelcome = document.getElementById('closeWelcome');
-
-  window.onload = () => {
-    overlay.classList.add('show');
-  };
-
-  closeWelcome.addEventListener('click', () => {
-    overlay.classList.remove('show');
-  });
+  window.onload = () => overlay.classList.add('show');
+  closeWelcome.addEventListener('click', () => overlay.classList.remove('show'));
 
   // HAMBURGER MENU
   const hamburger = document.getElementById('HamburgerMenu');
@@ -585,141 +944,147 @@ startInterval();
   const menuModal = document.getElementById('menuModal');
   const closeMenu = document.getElementById('closeMenu');
 
-  hamburger.addEventListener('click', () => {
-    menuOverlay.classList.add('show');
-    menuModal.classList.add('show');
-  });
+  hamburger.addEventListener('click', () => { menuOverlay.classList.add('show'); menuModal.classList.add('show'); });
+  closeMenu.addEventListener('click', () => { menuOverlay.classList.remove('show'); menuModal.classList.remove('show'); });
+  menuOverlay.addEventListener('click', () => { menuOverlay.classList.remove('show'); menuModal.classList.remove('show'); });
 
-  closeMenu.addEventListener('click', () => {
-    menuOverlay.classList.remove('show');
-    menuModal.classList.remove('show');
-  });
-
-  menuOverlay.addEventListener('click', () => {
-    menuOverlay.classList.remove('show');
-    menuModal.classList.remove('show');
-  });
-
+  // PRODUCTS
   const products = [
-  {id:1, title:"Retro 1999 Kit", price:"$79.99", img:"https://tse1.mm.bing.net/th/id/OIP.JaBvJraE2zAX_FQkLZZaUgHaHa?pid=Api&P=0&h=220", category:"retro", sizes:["S","M","L","XL"]},
-  {id:2, title:"'25-'26 Home Kit", price:"$99.99", img:"home2526.jpg", category:"2526", sizes:["M","L","XL","2XL"]},
-  {id:3, title:"Special Limited Kit", price:"$120.00", img:"specialkit.jpg", category:"special", sizes:["S","M","L","XL","2XL"]},
-  {id:4, title:"Hot New Kit", price:"$110.00", img:"hotkit.jpg", category:"hot", sizes:["M","L","XL"]}
-];
+    {id:1, title:"Retro 1999 Kit", price:"$79.99", img:"https://tse1.mm.bing.net/th/id/OIP.JaBvJraE2zAX_FQkLZZaUgHaHa?pid=Api&P=0&h=220", category:"retro", sizes:["S","M","L","XL"]},
+    {id:2, title:"'25-'26 Home Kit", price:"$99.99", img:"https://tse1.mm.bing.net/th/id/OIP.JaBvJraE2zAX_FQkLZZaUgHaHa?pid=Api&P=0&h=220", category:"2526", sizes:["M","L","XL","2XL"]},
+    {id:3, title:"Special Limited Kit", price:"$120.00", img:"https://tse1.mm.bing.net/th/id/OIP.JaBvJraE2zAX_FQkLZZaUgHaHa?pid=Api&P=0&h=220", category:"special", sizes:["S","M","L","XL","2XL"]},
+    {id:4, title:"Hot New Kit", price:"$110.00", img:"https://tse1.mm.bing.net/th/id/OIP.JaBvJraE2zAX_FQkLZZaUgHaHa?pid=Api&P=0&h=220", category:"hot", sizes:["M","L","XL"]},
+    {id:5, title: "Retro 2007 Man utd", price: "$14.99", img:"https://tse1.mm.bing.net/th/id/OIP.JaBvJraE2zAX_FQkLZZaUgHaHa?pid=Api&P=0&h=220", category:"retro", sizes:["S","L","2XL"]}
+  ];
 
-const container = document.querySelector('.products-container');
-const modal = document.querySelector('.viewDetailsModal');
-const viewItemOverlay = document.createElement('div');
-viewItemOverlay.className = 'modal-overlay';
-document.body.appendChild(viewItemOverlay);
+  const container = document.querySelector('.products-container');
+  const modal = document.querySelector('.viewDetailsModal');
+  const viewItemOverlay = document.createElement('div');
+  viewItemOverlay.className = 'modal-overlay';
+  document.body.appendChild(viewItemOverlay);
 
-// modal close
-function closeModal() {
-  modal.style.display = 'none';
-  viewItemOverlay.style.display = 'none';
-}
-viewItemOverlay.addEventListener('click', closeModal);
-document.addEventListener('keydown', e => { if(e.key==="Escape") closeModal(); });
+  function closeModal() { modal.style.display='none'; viewItemOverlay.style.display='none'; }
+  viewItemOverlay.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => { if(e.key==="Escape") closeModal(); });
 
-// render products
-function renderProducts(filter=null) {
-  container.innerHTML = '';
-  const filtered = filter ? products.filter(p => p.category===filter) : products;
-  filtered.forEach(p => {
-    const card = document.createElement('div');
-    card.className = "product-card fade-up";
-    card.innerHTML = `
-      <img src="${p.img}" alt="${p.title}">
-      <div class="product-info">
-        <h3>${p.title}</h3>
-        <p>${p.price}</p>
-      </div>
-      <div class="product-buttons">
-        <button class="add-cart">Add To Cart</button>
-        <button class="view-details">View Details</button>
-      </div>
-    `;
-    container.appendChild(card);
+  function renderProducts(filter=null) {
+    container.innerHTML = '';
+    const filtered = filter ? products.filter(p => p.category===filter) : products;
+    filtered.forEach(p => {
+      const card = document.createElement('div');
+      card.className = "product-card fade-up";
+      card.innerHTML = `
+        <img src="${p.img}" alt="${p.title}">
+        <div class="product-info">
+          <h3>${p.title}</h3>
+          <p>${p.price}</p>
+        </div>
+        <div class="product-buttons">
+          <button class="add-cart">Add To Cart</button>
+          <button class="view-details">View Details</button>
+        </div>
+      `;
+      container.appendChild(card);
 
-    // add to cart
-    card.querySelector('.add-cart').addEventListener('click', () => alert(`${p.title} added to cart! 🥀`));
+      // view details
+      card.querySelector('.view-details').addEventListener('click', () => {
+        modal.querySelector('img').src = p.img;
+        modal.querySelector('h1').textContent = p.title;
+        modal.querySelector('p').textContent = p.price;
 
-    // view details
-    card.querySelector('.view-details').addEventListener('click', () => {
-      modal.querySelector('img').src = p.img;
-      modal.querySelector('h1').textContent = p.title;
-      modal.querySelector('p').textContent = p.price;
+        const kitSizeDiv = modal.querySelector('.kit-size');
+        kitSizeDiv.innerHTML = '';
+        p.sizes.forEach(size => {
+          const btn = document.createElement('button');
+          btn.className = 'kitSizeButton';
+          btn.textContent = size;
+          kitSizeDiv.appendChild(btn);
+        });
 
-      // fill sizes dynamically
-      const kitSizeDiv = modal.querySelector('.kit-size');
-      kitSizeDiv.innerHTML = '';
-      p.sizes.forEach(size => {
-        const btn = document.createElement('button');
-        btn.className = 'kitSizeButton';
-        btn.textContent = size;
-        kitSizeDiv.appendChild(btn);
+        modal.style.display = 'flex';
+        viewItemOverlay.style.display = 'block';
       });
+    });
+  }
+  renderProducts();
 
-      modal.style.display = 'flex';
-      viewItemOverlay.style.display = 'block';
+  // CATEGORY BUTTONS
+  const catButtons = document.querySelectorAll('.categories button');
+  catButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const catClass = btn.classList[0]; // retro, kits25, etc
+      let filterCat = catClass==='kits25' ? '2526' : catClass;
+      renderProducts(filterCat);
     });
   });
-}
 
-// render all products by default
-renderProducts();
-
-// category buttons
-document.querySelectorAll('.category-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const cat = btn.getAttribute('data-cat');
-    renderProducts(cat);
+  // MENU LINKS
+  document.querySelectorAll('#menuModal ul li a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      let text = link.textContent.toLowerCase();
+      let filterCat;
+      if(text.includes('retro')) filterCat='retro';
+      else if(text.includes("25-'26")) filterCat='2526';
+      else if(text.includes('special')) filterCat='special';
+      else if(text.includes('hot')) filterCat='hot';
+      renderProducts(filterCat);
+      menuOverlay.classList.remove('show');
+      menuModal.classList.remove('show');
+    });
   });
-});
 
-const menuLinks = document.querySelectorAll('#menuModal ul li a');
+  // FADE-UP ANIMATION
+  const faders = document.querySelectorAll('.fade-up');
+  function checkFade() {
+    const triggerBottom = window.innerHeight*0.85;
+    faders.forEach(fader => { if(fader.getBoundingClientRect().top < triggerBottom) fader.classList.add('show'); });
+  }
+  window.addEventListener('scroll', checkFade);
+  window.addEventListener('load', checkFade);
 
-// attach click to each category link
-menuLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault(); // prevent default anchor behavior
+  // CART
+  let cart = [];
+  const cartIcon = document.getElementById("cartIcon");
+  const cartOverlay = document.getElementById("cartOverlay");
+  const cartModal = document.getElementById("cartModal");
+  const closeCart = document.getElementById("closeCart");
+  const cartItems = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
 
-    const categoryText = link.textContent.toLowerCase(); // "retro kits" etc.
-    let filterCat;
+  function updateCart() {
+    cartItems.innerHTML = '';
+    let total = 0;
+    cart.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `<img src="${item.img}"><div class="cart-item-details"><h4>${item.title}</h4><p>${item.price}</p></div>`;
+      cartItems.appendChild(div);
+      total += parseFloat(item.price.replace('$',''));
+    });
+    cartTotal.innerHTML = `<strong>Total:</strong> $${total.toFixed(2)}`;
+  }
 
-    // map text to your product category keys
-    if(categoryText.includes('retro')) filterCat = 'retro';
-    else if(categoryText.includes("25-'26")) filterCat = '2526';
-    else if(categoryText.includes('special')) filterCat = 'special';
-    else if(categoryText.includes('hot')) filterCat = 'hot';
+  function addToCart(product) {
+    cart.push(product);
+    updateCart();
+  }
 
-    // render only filtered products
-    renderProducts(filterCat);
-
-    // close menu modal
-    document.getElementById('menuModal').style.display = 'none';
-    document.getElementById('menuOverlay').style.display = 'none';
-  });
-});
-
-const faders = document.querySelectorAll('.fade-up');
-
-function checkFade() {
-  const triggerBottom = window.innerHeight * 0.85; // 85% of viewport height
-
-  faders.forEach(fader => {
-    const top = fader.getBoundingClientRect().top;
-
-    if(top < triggerBottom) {
-      fader.classList.add('show');
+  document.addEventListener('click', e => {
+    if(e.target.classList.contains('add-cart')) {
+      const card = e.target.closest('.product-card');
+      const title = card.querySelector('h3').textContent;
+      const price = card.querySelector('p').textContent;
+      const img = card.querySelector('img').src;
+      addToCart({title, price, img});
     }
   });
-}
 
-window.addEventListener('scroll', checkFade);
-window.addEventListener('load', checkFade);
-
+  cartIcon.addEventListener('click', () => { cartOverlay.classList.add('show'); cartModal.classList.add('show'); });
+  cartOverlay.addEventListener('click', () => { cartOverlay.classList.remove('show'); cartModal.classList.remove('show'); });
+  closeCart.addEventListener('click', () => { cartOverlay.classList.remove('show'); cartModal.classList.remove('show'); });
 </script>
+
 
 </body>
 </html>
